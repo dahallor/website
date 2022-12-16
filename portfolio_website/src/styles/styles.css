@@ -1,0 +1,18 @@
+@font-face {
+    src: url(../assets/VT323/VT323-Regular.ttf);
+    font-family: VT323;
+}
+
+* {
+    font-family: VT323;
+    background-color: black;
+    color: white;
+}
+
+.navContainer {
+    background: #222529
+}
+
+.navItem {
+    background: #222529
+}
