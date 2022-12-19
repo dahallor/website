@@ -1,15 +1,15 @@
 import '../styles/home.css'
 import { useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Button } from 'react-bootstrap'
 
 
 const Home = () => {
     const oneOne = "Hi,"
-    const oneTwo = " I'm Dave"
+    const oneTwo = "I'm Dave"
     const two = "I have a Master's in Computer Science"
     const threeOne = "I like to code websites,"
-    const threeTwo = " apps,"
-    const threeThree = " & programs"
+    const threeTwo = "apps,"
+    const threeThree = "& programs"
     const [textOneOne, setTextOneOne] = useState(null)
     const [textOneTwo, setTextOneTwo] = useState(null)
     const [textTwo, setTextTwo] = useState(null)
@@ -24,62 +24,74 @@ const Home = () => {
     const [begin, setBegin] = useState(null)
     const [end, setEnd] = useState(null)
 
-
-
-
     async function typing(textToAdd, setText, timeElapsed) {
-        const typeInterval = 50
+        const typeInterval = 25
         for (let i = 0; i < textToAdd.length; i++) {
             setTimeout(async () => {
                 if (i == 0) {
                     setText(textToAdd[i] + "_")
-                } else {
+                } if (i > 0 && i < textToAdd.length) {
                     setText(prevText => prevText.slice(0, -1))
                     setText(prevText => prevText + textToAdd[i])
                     setText(prevText => prevText + "_")
+                } if (i == textToAdd.length - 1) {
+                    setText(prevText => prevText.slice(0, -1))
                 }
             }, timeElapsed + typeInterval)
             timeElapsed += typeInterval
         }
+
         return timeElapsed
     }
 
     async function pause(setText, timeElapsed, type) {
-        const blinkInterval = 600
-        let loop = 0
-        if (type == "short") {
-            loop = 4
-        } else {
-            loop = 6
-        }
-        for (let i = 0; i < loop; i++) {
+        const comaInterval = 600
+        const pauseInterval = 2000
+        if (type === 'coma') {
             setTimeout(async () => {
-                if (i % 2 == 0) {
-                    setText("_")
-                } else {
-                    setText(" ")
-                }
-            }, timeElapsed + blinkInterval)
-            timeElapsed += blinkInterval
+                setText("_")
+            }, timeElapsed)
+            setTimeout(async () => {
+                setText(" ")
+            }, timeElapsed + comaInterval)
+            timeElapsed += comaInterval
+        } else {
+            setTimeout(async () => {
+                setText("_")
+            }, timeElapsed)
+            setTimeout(async () => {
+                setText(" ")
+            }, timeElapsed + pauseInterval)
+            timeElapsed += pauseInterval
         }
         return timeElapsed
-
     }
+
+    async function endAnimation(setText, timeElapsed) {
+        setTimeout(async () => {
+            setText("_")
+        }, timeElapsed)
+        setTimeout(async () => {
+            document.getElementById("continue-button").style.opacity = 1;
+        }, timeElapsed + 2000)
+    }
+
 
     async function run() {
         let timeElapsed = await pause(setBegin, 0, "short")
         timeElapsed = await typing(oneOne, setTextOneOne, timeElapsed)
-        timeElapsed = await pause(setShortPauseOne, timeElapsed, "short")
+        timeElapsed = await pause(setShortPauseOne, timeElapsed, "coma")
         timeElapsed = await typing(oneTwo, setTextOneTwo, timeElapsed)
         timeElapsed = await pause(setLongPauseOne, timeElapsed, "long")
         timeElapsed = await typing(two, setTextTwo, timeElapsed)
         timeElapsed = await pause(setLongPauseTwo, timeElapsed, "long")
         timeElapsed = await typing(threeOne, setTextThreeOne, timeElapsed)
-        timeElapsed = await pause(setShortPauseThreeOne, timeElapsed, "short")
+        timeElapsed = await pause(setShortPauseThreeOne, timeElapsed, "coma")
         timeElapsed = await typing(threeTwo, setTextThreeTwo, timeElapsed)
-        timeElapsed = await pause(setShortPauseThreeTwo, timeElapsed, "short")
+        timeElapsed = await pause(setShortPauseThreeTwo, timeElapsed, "coma")
         timeElapsed = await typing(threeThree, setTextThreeThree, timeElapsed)
-        timeElapsed = await pause(setEnd, timeElapsed, "long")
+        await endAnimation(setEnd, timeElapsed)
+        //console.log(timeElapsed)
     }
 
     useEffect(() => {
@@ -87,29 +99,33 @@ const Home = () => {
     }, [])
 
     return (
-        <Container className='homeContainer'>
-            <div className='line1'>
-                <span>
-                    <h1 className='shortPause' id='begin'>{begin}</h1>
-                    <h1 className='one-one'>{textOneOne}</h1>
-                    <h1 className='short-pause' id='short-pause-one'>{shortPauseOne}</h1>
-                    <h1 className='one-two'>{textOneTwo}</h1>
-                    <h1 className='long-pause'>{longPauseOne}</h1>
-                </span>
-            </div>
-            <div className='line2'>
-                <h1 className='two'>{textTwo}</h1>
-                <h1 className='long-pause'>{longPauseTwo}</h1>
-            </div>
-            <div className='line3'>
-                <h1 className='three-one'>{textThreeOne}</h1>
-                <h1 className='short-pause'>{shortPauseThreeOne}</h1>
-                <h1 className='three-two'>{textThreeTwo}</h1>
-                <h1 className='short-pause'>{shortPauseThreeTwo}</h1>
-                <h1 className='three-three'>{textThreeThree}</h1>
-                <h1 className='end-point'>{end}</h1>
-            </div>
-        </Container>
+        <>
+            <Container className='homeContainer'>
+                <div className='line1'>
+                    <span>
+                        <h1 className='begin-point' id='begin'>{begin}</h1>
+                        <h1 className='one-one'>{textOneOne}</h1>
+                        <h1 className='short-pause' id='short-pause-one'>{shortPauseOne}</h1>
+                        <h1 className='one-two'>{textOneTwo}</h1>
+                        <h1 className='long-pause'>{longPauseOne}</h1>
+                    </span>
+                </div>
+                <div className='line2'>
+                    <h1 className='two'>{textTwo}</h1>
+                    <h1 className='long-pause'>{longPauseTwo}</h1>
+                </div>
+                <div className='line3'>
+                    <h1 className='three-one'>{textThreeOne}</h1>
+                    <h1 className='short-pause'>{shortPauseThreeOne}</h1>
+                    <h1 className='three-two'>{textThreeTwo}</h1>
+                    <h1 className='short-pause'>{shortPauseThreeTwo}</h1>
+                    <h1 className='three-three'>{textThreeThree}</h1>
+                    <h1 className='end-point'>{end}</h1>
+                </div>
+                <Button className='button' id='continue-button'>Come See My Work</Button>
+            </Container>
+
+        </>
     );
 }
 
