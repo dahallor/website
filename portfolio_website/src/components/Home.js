@@ -1,55 +1,117 @@
 import '../styles/home.css'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { Container } from 'react-bootstrap'
 
 
 const Home = () => {
-    const [textOne, setTextOne] = useState("")
+    const oneOne = "Hi,"
+    const oneTwo = " I'm Dave"
+    const two = "I have a Master's in Computer Science"
+    const threeOne = "I like to code websites,"
+    const threeTwo = " apps,"
+    const threeThree = " & programs"
+    const [textOneOne, setTextOneOne] = useState(null)
+    const [textOneTwo, setTextOneTwo] = useState(null)
     const [textTwo, setTextTwo] = useState(null)
-    const [textThree, setTextThree] = useState(null)
-    let lineOneText = "Hi, I'm Dave."
-    let lineTwoText = "I have a Master's in Computer Science."
-    let lineThreeText = "I like to code websites, apps, & programs."
+    const [textThreeOne, setTextThreeOne] = useState(null)
+    const [textThreeTwo, setTextThreeTwo] = useState(null)
+    const [textThreeThree, setTextThreeThree] = useState(null)
+    const [shortPauseOne, setShortPauseOne] = useState(null)
+    const [longPauseOne, setLongPauseOne] = useState(null)
+    const [longPauseTwo, setLongPauseTwo] = useState(null)
+    const [shortPauseThreeOne, setShortPauseThreeOne] = useState(null)
+    const [shortPauseThreeTwo, setShortPauseThreeTwo] = useState(null)
+    const [begin, setBegin] = useState(null)
+    const [end, setEnd] = useState(null)
 
 
-    function runSetTimeout(currentChar, setText, interval) {
-        setTimeout = () => {
-            let updatedText = textOne + currentChar
-            setText(updatedText);
-        }, interval;
-    }
 
-    function iterateText(currentText, setText) {
-        for (let i = 0; i < currentText.length; i++) {
-            let currentChar = currentText[i]
-            let interval = 0
-            switch (currentText[i]) {
-                case ',':
-                    interval = 2000
-                case '.':
-                    interval = 3500
-                default:
-                    interval = 100000000
-            }
-            runSetTimeout(currentChar, setText, interval)
+
+    async function typing(textToAdd, setText, timeElapsed) {
+        const typeInterval = 50
+        for (let i = 0; i < textToAdd.length; i++) {
+            setTimeout(async () => {
+                if (i == 0) {
+                    setText(textToAdd[i] + "_")
+                } else {
+                    setText(prevText => prevText.slice(0, -1))
+                    setText(prevText => prevText + textToAdd[i])
+                    setText(prevText => prevText + "_")
+                }
+            }, timeElapsed + typeInterval)
+            timeElapsed += typeInterval
         }
+        return timeElapsed
     }
 
-    // useEffect(() => {
-    //     console.log('use effect')
-    //     console.log(textOne)
-    // }, [])
+    async function pause(setText, timeElapsed, type) {
+        const blinkInterval = 600
+        let loop = 0
+        if (type == "short") {
+            loop = 4
+        } else {
+            loop = 6
+        }
+        for (let i = 0; i < loop; i++) {
+            setTimeout(async () => {
+                if (i % 2 == 0) {
+                    setText("_")
+                } else {
+                    setText(" ")
+                }
+            }, timeElapsed + blinkInterval)
+            timeElapsed += blinkInterval
+        }
+        return timeElapsed
 
+    }
 
+    async function run() {
+        let timeElapsed = await pause(setBegin, 0, "short")
+        timeElapsed = await typing(oneOne, setTextOneOne, timeElapsed)
+        timeElapsed = await pause(setShortPauseOne, timeElapsed, "short")
+        timeElapsed = await typing(oneTwo, setTextOneTwo, timeElapsed)
+        timeElapsed = await pause(setLongPauseOne, timeElapsed, "long")
+        timeElapsed = await typing(two, setTextTwo, timeElapsed)
+        timeElapsed = await pause(setLongPauseTwo, timeElapsed, "long")
+        timeElapsed = await typing(threeOne, setTextThreeOne, timeElapsed)
+        timeElapsed = await pause(setShortPauseThreeOne, timeElapsed, "short")
+        timeElapsed = await typing(threeTwo, setTextThreeTwo, timeElapsed)
+        timeElapsed = await pause(setShortPauseThreeTwo, timeElapsed, "short")
+        timeElapsed = await typing(threeThree, setTextThreeThree, timeElapsed)
+        timeElapsed = await pause(setEnd, timeElapsed, "long")
+    }
 
-    iterateText(lineOneText, setTextOne)
-    setTextOne("test")
+    useEffect(() => {
+        run()
+    }, [])
+
     return (
-        <div className="homeContainer">
-            <div className='line1'>{textOne}</div>
-            <div className='line2'>{textTwo}</div>
-            <div className='line3'>{textThree}</div>
-        </div>
+        <Container className='homeContainer'>
+            <div className='line1'>
+                <span>
+                    <h1 className='shortPause' id='begin'>{begin}</h1>
+                    <h1 className='one-one'>{textOneOne}</h1>
+                    <h1 className='short-pause' id='short-pause-one'>{shortPauseOne}</h1>
+                    <h1 className='one-two'>{textOneTwo}</h1>
+                    <h1 className='long-pause'>{longPauseOne}</h1>
+                </span>
+            </div>
+            <div className='line2'>
+                <h1 className='two'>{textTwo}</h1>
+                <h1 className='long-pause'>{longPauseTwo}</h1>
+            </div>
+            <div className='line3'>
+                <h1 className='three-one'>{textThreeOne}</h1>
+                <h1 className='short-pause'>{shortPauseThreeOne}</h1>
+                <h1 className='three-two'>{textThreeTwo}</h1>
+                <h1 className='short-pause'>{shortPauseThreeTwo}</h1>
+                <h1 className='three-three'>{textThreeThree}</h1>
+                <h1 className='end-point'>{end}</h1>
+            </div>
+        </Container>
     );
 }
+
 
 export default Home

@@ -1,3 +1,8 @@
+:root {
+    --typeSpeed: .15s;
+    --blinkSpeed: .45s
+}
+
 .homeContainer {
     display: flex;
     flex-direction: column;
@@ -5,4 +10,22 @@
     justify-content: center;
     height: 100vh;
     font-size: 3.5vw;
+}
+
+h1 {
+    display: inline
+}
+
+.short-pause {
+    animation: blink var(--blinkSpeed) linear 3
+}
+
+@keyframes blink {
+    50% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0
+    }
 }
