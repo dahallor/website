@@ -122,7 +122,7 @@ const Home = () => {
                     <h1 className='three-three'>{textThreeThree}</h1>
                     <h1 className='end-point'>{end}</h1>
                 </div>
-                <Button className='button' id='continue-button'>Come See My Work</Button>
+                {/* <Button className='button' id='continue-button'>Come See My Work</Button> */}
             </Container>
 
         </>
