@@ -1,7 +1,8 @@
 .card {
     border: 1px;
     margin: 20px;
-    transition: .25s linear
+    font-size: 1.5rem;
+    transition: .25s linear;
 }
 
 

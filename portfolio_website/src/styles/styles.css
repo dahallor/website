@@ -14,5 +14,9 @@
 }
 
 .navItem {
-    background: #222529
+    background: #222529;
+}
+
+.navContainer .linkContainer {
+    justify-content: flex-end
 }

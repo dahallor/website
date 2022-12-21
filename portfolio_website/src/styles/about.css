@@ -1,0 +1,41 @@
+p {
+    font-size: 1.25rem;
+}
+
+.slideOne {
+    background: #ADBDCC
+}
+
+.slideTwo {
+    background: #6E7885
+}
+
+.slideThree {
+    background: #A7B5C9
+}
+
+.slideFour {
+    background: #535A63
+}
+
+.slideFive {
+    background: #7E8996
+}
+
+.slideSix {
+    background: #A1AFBF
+}
+
+.slideSeven {
+    background: #383D42
+}
+
+
+.carousel-indicators {
+    opacity: .3
+}
+
+
+img {
+    width: 100%
+}

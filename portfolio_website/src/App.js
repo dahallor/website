@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <NavbarComponent />
-      <div>
+      <Container>
         <Router>
           <Routes>
             <Route exact path='/' element={<Home />} />
@@ -23,7 +23,7 @@ function App() {
             <Route path='/contact' element={<Contact />} />
           </Routes>
         </Router>
-      </div>
+      </Container>
     </>
   );
 }

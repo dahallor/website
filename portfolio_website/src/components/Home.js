@@ -122,7 +122,9 @@ const Home = () => {
                     <h1 className='three-three'>{textThreeThree}</h1>
                     <h1 className='end-point'>{end}</h1>
                 </div>
-                {/* <Button className='button' id='continue-button'>Come See My Work</Button> */}
+                <a href='/portfolio'>
+                    <button className='button' id='continue-button' href="/portfolio">Come See My Work</button>
+                </a>
             </Container>
 
         </>
