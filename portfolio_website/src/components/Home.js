@@ -123,7 +123,7 @@ const Home = () => {
                     <h1 className='end-point'>{end}</h1>
                 </div>
                 <a href='/portfolio'>
-                    <button className='button' id='continue-button' href="/portfolio">Come See My Work</button>
+                    <Button variant='light' className='button' id='continue-button' href="/portfolio">Come See My Work</Button>
                 </a>
             </Container>
 

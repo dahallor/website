@@ -14,7 +14,7 @@
             "name": "Gerdle",
             "description": "A twist on the classic worde game 'Wordle'. Instead of having 6 guesses to solve a 5 letter english word, you have 6 guesses to solve a 27 letter german word!",
             "language": "HTML, CSS, Vanilla JavaScript",
-            "hyperlink": "http://www.dahallor.github.io/gerdle/"
+            "hyperlink": "https://www.gerdle.net/"
         }
     ]
 }

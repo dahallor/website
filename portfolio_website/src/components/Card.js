@@ -1,24 +1,29 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { Card, Image, Row, Col } from 'react-bootstrap'
 import '../styles/card.css'
 
-function CardComponent(props) {
+function CardComponent({ name, description, language, hyperlink, img }) {
     const openCurly = "{"
     const closedCurly = "}"
-    console.log({ props })
+    let hype = hyperlink
+
+
     return (
         <div className="card">
             <div className="row g-0">
                 <div className="col-sm-5">
-                    <img src={props.img} className="card-img-top h-100" alt="..." />
+                    <img src={img} className="card-img-top h-100" alt="..." />
                 </div>
                 <div className="col-sm-7">
                     <div className="card-body">
                         <p className="card-text">{openCurly}</p>
-                        <p className="card-text">"name": {props.name}</p>
-                        <p className="card-text">"description": {props.description}</p>
-                        <p className="card-text">"language": {props.language}</p>
-                        <p className="card-text">"hyperlink": {props.hyperlink}</p>
+                        <p className="card-text">"name": {name}</p>
+                        <p className="card-text">"description": {description}</p>
+                        <p className="card-text">"language": {language}</p>
+                        <p className="card-text">"hyperlink":
+                            <a href={hyperlink} target='_blank'> {hyperlink}</a>
+                        </p>
                         <p className="card-text">{closedCurly}</p>
                     </div>
                 </div>

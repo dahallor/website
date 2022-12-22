@@ -33,7 +33,7 @@ h1 {
     animation: blink var(--blinkSpeed) infinite;
 }
 
-.button {
+.btn-light {
     opacity: 0;
     animation: fade-in 2s ease-in forwards, bounce 3s cubic-bezier(0.4, 0, 1, 1) infinite;
     animation-delay: 12s, 15s;
@@ -55,8 +55,8 @@ h1 {
 @keyframes fade-in {
     0% {
         opacity: 0;
-        background: black;
-        color: black
+        --bs-btn-bg: black;
+        --bs-btn-border-color: black
     }
 
     100% {
